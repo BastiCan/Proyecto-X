@@ -1,5 +1,4 @@
 
-
 void Read_hits() {
 
   HL = analogRead(A0);
@@ -19,10 +18,8 @@ void Read_hits() {
 }
 
 void detectGeo() {
-
   Read_hits();
-
-
+  
   if ((HL == 0) && (HR == 0)) {
     geo = 0;
   }
@@ -40,10 +37,6 @@ void detectGeo() {
   }
 
   if (l_geo != geo) {
-
-
-
-
     if (geo == 0 && l_geo == 2 && ll_geo == 0) {
 
       funcion_HL();
@@ -64,12 +57,10 @@ void detectGeo() {
 }
 
 void funcion_HL() {
-
   tone(PINBUZZER, 2000, 50);
 }
 
 void funcion_HR() {
-
   tone(PINBUZZER, 1500, 50);
   fin++;
 
@@ -116,8 +107,6 @@ void funcion_HR() {
       break;
 
     default:
-      // if nothing else matches, do the default
-      // default is optional
       break;
   }
 }
