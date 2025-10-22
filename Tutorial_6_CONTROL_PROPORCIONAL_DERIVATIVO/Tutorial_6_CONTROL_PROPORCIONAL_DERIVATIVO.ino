@@ -24,13 +24,6 @@ correction_power = Kprop*error + kderiv* (error - error_pasado).
 La corrección derivativa nos ayuda a amortiguar las oscilaciones provocadas por la corrección proporcional.
  
 */
-
-
-
-
-
-
-
 #define PINBUZZER 10
 #define PINBOTON 2
 #define PINLED 13
@@ -44,10 +37,10 @@ int posicion_ideal = 0;
 
 //cuando el robot deje de oscilar, puedes subirle la velocidad nuevamente, y comenzar nuevamente a modificar el Kprop y el Kderiv.
 
-float Kprop = 0.04;  
-float Kderiv = 0.04;
+float Kprop = 0.5;  
+float Kderiv = 0;
 
-int base = 10;
+int base = 50;
 int error_pasado = 0;
 
 
@@ -77,7 +70,6 @@ void setup() {
 
 
 void loop() {
-
   int p = GetPos();
   Serial.println(p);
   int error = p - posicion_ideal;
@@ -89,13 +81,11 @@ void loop() {
 
   }
 
-  else if (correction_power < 255) {
+  else if (correction_power < -255) {
     correction_power = -255;
   }
 
-  Motores(base + correction_power, base + correction_power);
+  //Motores(base - correction_power, base + correction_power);
   error_pasado = error;
-  
 
-  delay(1);
 }
